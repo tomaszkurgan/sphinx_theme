@@ -47,17 +47,21 @@ def autodoc_process_docstring(app, what, name, obj, options, lines):
             # off the class
             name = name[0:-9]
 
+        # edit START
         def cvt(m):
-            modifier, objname, paramname = m.group(1) or '', name, m.group(2)
-            refname = _refname_from_paramname(paramname, strip_markup=True)
-            item = ('single', '%s (%s parameter)' % (refname, objname),
-                    '%s.params.%s' % (objname, refname), '')
-            if LooseVersion(__version__) >= LooseVersion('1.4.0'):
-                item += (None,)
-            doc_idx.append(item)
-            return ":param %s_sphinx_paramlinks_%s.%s:" % (
-                modifier, objname, paramname)
-        return re.sub(r'^:param ([^:]+? )?([^:]+?):', cvt, line)
+            directive, modifier, objname, paramname = (
+                m.group(1), m.group(2) or '', name, m.group(3))
+            if directive == 'param':
+                refname = _refname_from_paramname(paramname, strip_markup=True)
+                item = ('single', '%s (%s parameter)' % (refname, objname),
+                        '%s.params.%s' % (objname, refname), '')
+                if LooseVersion(__version__) >= LooseVersion('1.4.0'):
+                    item += (None,)
+                doc_idx.append(item)
+            return ":%s %s_sphinx_paramlinks_%s.%s:" % (
+                directive, modifier, objname, paramname)
+        return re.sub(r'^:(param|type) ([^:]+? )?([^:]+?):', cvt, line)
+        # edit END
 
     if what in ('function', 'method', 'class'):
         lines[:] = [_cvt_param(name, line) for line in lines]
