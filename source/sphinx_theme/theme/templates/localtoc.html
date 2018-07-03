@@ -1,0 +1,19 @@
+<div>
+    <hr class="separator sep-margin">
+
+    <div>
+        {% if toc %}
+            <h3>Table of content</h3>
+            {{ toc }}
+            <hr class="separator sep-margin">
+        {% endif %}
+    </div>
+
+    <div>
+        <h4><a href="{{ pathto(master_doc) | dirname | join_with('genindex.html') }}">Index</a></h4>
+        <h4><a href="{{ pathto(master_doc) | dirname | join_with('py-modindex.html') }}">Module Index</a></h4>
+    </div>
+
+    <hr class="separator sep-margin">
+
+</div>

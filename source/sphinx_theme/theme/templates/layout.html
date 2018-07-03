@@ -1,0 +1,15 @@
+{# layout.html #}
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+
+{% block document %}
+    <div class="mobile-header">
+        <a href="{{ pathto(master_doc) }}"><h1>{{ project }}</h></a>
+    </div>
+    {{ super() }}
+{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="https://media.readthedocs.org/css/badge_only.css" type="text/css">
+<link rel="stylesheet" href="https://media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css" />
+{% endblock %}
