@@ -1,0 +1,7 @@
+include source/sphinx_theme/make.bat_t
+include source/sphinx_theme/Makefile_t
+include source/sphinx_theme/ext/sphinx_paramlinks/sphinx_paramlinks.css
+
+
+recursive-include source/sphinx_theme/theme/static *
+recursive-include source/sphinx_theme/theme/templates *
