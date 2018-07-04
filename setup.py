@@ -1,11 +1,24 @@
 from setuptools import setup, find_packages
 import os
 
-packages = find_packages(os.path.join('.', 'source'))
+source_dir = 'source'
+
+packages = find_packages(os.path.join('.', source_dir))
 package_dir = {}
 for package in packages:
     package_path = os.path.join(*package.split('.'))
-    package_dir[package] = os.path.join('source', package_path)
+    package_dir[package] = os.path.join(source_dir, package_path)
+
+install_requires = [
+    'sphinx',
+    'jinja2',
+]
+dependency_links = []
+
+READTHEDOCS_PROJECT = os.environ.get('READTHEDOCS_PROJECT')
+if not READTHEDOCS_PROJECT or READTHEDOCS_PROJECT != 'slex':
+    install_requires.append('slex<=999')
+    dependency_links.append('https://github.com/tomaszkurgan/slex/archive/master.zip#egg=slex-999')
 
 setup(
     name='sphinx_theme',
@@ -13,8 +26,6 @@ setup(
     packages=packages,
     package_dir=package_dir,
     include_package_data=True,
-    install_requires=[
-        'sphinx',
-        'jinja2',
-    ]
+    install_requires=install_requires,
+    dependency_links=dependency_links,
 )
