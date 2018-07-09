@@ -1,4 +1,8 @@
 
+.idea/misc.xml
+.idea/modules.xml
+.idea/sphinx_theme.iml
+
 # Created by https://www.gitignore.io/api/linux,macos,python,windows,pycharm,notepadpp,visualstudiocode
 
 ### Linux ###
